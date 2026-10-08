@@ -89,3 +89,53 @@ section {
     scroll-padding-top: 90px;
   }
 }
+
+/* ================================
+   HERO IMAGE ANIMATION
+================================ */
+
+@keyframes profileBorderSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.profile-border-spin {
+  animation: profileBorderSpin 7s linear infinite;
+}
+
+@keyframes profileGlow {
+
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.profile-glow {
+  animation: profileGlow 4s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-badge {
+  animation: floatBadge 4s ease-in-out infinite;
+}

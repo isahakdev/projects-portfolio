@@ -16,12 +16,11 @@ const navItems = [
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+
     const { theme, setTheme } = useTheme();
 
-    const isDark = theme === "dark";
-
     const toggleTheme = () => {
-        setTheme(isDark ? "light" : "dark");
+        setTheme(theme === "dark" ? "light" : "dark");
     };
 
     const closeMenu = () => {
@@ -31,7 +30,11 @@ export default function Navbar() {
     return (
         <header className="fixed left-1/2 top-2 z-50 w-[calc(100%-20px)] max-w-6xl -translate-x-1/2">
             <nav className="rounded-2xl border border-black/10 bg-white/90 px-4 shadow-sm backdrop-blur-xl transition-colors duration-300 dark:border-white/10 dark:bg-[#050505]/90 sm:px-5">
+
+                {/* Main Navbar */}
                 <div className="flex h-16 items-center justify-between">
+
+                    {/* Logo */}
                     <a
                         href="#home"
                         onClick={closeMenu}
@@ -40,6 +43,7 @@ export default function Navbar() {
                         Sayem<span className="text-cyan-500">.</span>
                     </a>
 
+                    {/* Desktop Navigation */}
                     <div className="hidden items-center gap-6 lg:flex">
                         {navItems.map((item) => (
                             <a
@@ -52,16 +56,24 @@ export default function Navbar() {
                         ))}
                     </div>
 
+                    {/* Desktop Buttons */}
                     <div className="hidden items-center gap-3 sm:flex">
+
+                        {/* Theme Button */}
                         <button
                             type="button"
                             onClick={toggleTheme}
                             aria-label="Toggle theme"
                             className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:border-cyan-400 hover:text-cyan-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-300 dark:hover:border-cyan-400 dark:hover:text-cyan-400"
                         >
-                            {isDark ? <Sun size={17} /> : <Moon size={17} />}
+                            {theme === "dark" ? (
+                                <Sun size={17} />
+                            ) : (
+                                <Moon size={17} />
+                            )}
                         </button>
 
+                        {/* Contact */}
                         <a
                             href="#contact"
                             className="rounded-full bg-gray-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-400 hover:text-black dark:bg-white dark:text-black dark:hover:bg-cyan-400"
@@ -70,30 +82,41 @@ export default function Navbar() {
                         </a>
                     </div>
 
+                    {/* Mobile Buttons */}
                     <div className="flex items-center gap-2 sm:hidden">
+
+                        {/* Theme */}
                         <button
                             type="button"
                             onClick={toggleTheme}
                             aria-label="Toggle theme"
-                            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-gray-300"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:border-cyan-400 hover:text-cyan-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-300"
                         >
-                            {isDark ? <Sun size={17} /> : <Moon size={17} />}
+                            {theme === "dark" ? (
+                                <Sun size={17} />
+                            ) : (
+                                <Moon size={17} />
+                            )}
                         </button>
 
+                        {/* Menu */}
                         <button
                             type="button"
-                            onClick={() => setIsOpen(!isOpen)}
+                            onClick={() => setIsOpen((prev) => !prev)}
                             aria-label="Toggle menu"
-                            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-gray-300"
+                            aria-expanded={isOpen}
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:border-cyan-400 hover:text-cyan-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-300"
                         >
                             {isOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
                     </div>
                 </div>
 
+                {/* Mobile Menu */}
                 {isOpen && (
                     <div className="border-t border-gray-200 py-4 dark:border-white/10 lg:hidden">
                         <div className="flex flex-col gap-1">
+
                             {navItems.map((item) => (
                                 <a
                                     key={item.href}
@@ -108,10 +131,11 @@ export default function Navbar() {
                             <a
                                 href="#contact"
                                 onClick={closeMenu}
-                                className="mt-2 rounded-xl bg-gray-950 px-4 py-3 text-center text-sm font-semibold text-white dark:bg-white dark:text-black"
+                                className="mt-2 rounded-xl bg-gray-950 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-cyan-400 hover:text-black dark:bg-white dark:text-black"
                             >
                                 Let&apos;s Talk
                             </a>
+
                         </div>
                     </div>
                 )}
